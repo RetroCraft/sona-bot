@@ -1,0 +1,22 @@
+{
+  "name": "sona-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "node-cron": "^3.0.2",
+    "selenium-webdriver": "^4.9.2"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.7",
+    "@types/selenium-webdriver": "^4.1.15",
+    "ts-node": "^10.9.1"
+  }
+}
