@@ -51,8 +51,10 @@ const fetchStudies = async (): Promise<Study[]> => {
   log('fetching studies...')
   const table = driver.wait(until.elementLocated({ css: 'div.form-horizontal.tasi-form table' }));
   const rows = await table.findElements({ css: 'tbody tr' });
-  const studies = await Promise.all(rows.map(async (row) => {
+  const studies = []
+  for (const row of rows) {
     const rowId = await row.getAttribute('id');
+    if (!rowId) continue;
     log(`parsing row ${rowId}...`)
     log(await row.getText())
     // example: ctl00_ContentPlaceHolder1_repStudentStudies_ctl07_RepeaterRow
@@ -62,8 +64,8 @@ const fetchStudies = async (): Promise<Study[]> => {
     const id = link.split('experiment_id=')[1];
     const credits = await row.findElement({ id: `${idBase}_LabelCredits` }).getText();
     const description = await row.findElement({ id: `${idBase}_LabelStudyType` }).getText();
-    return { id, name, link: `link`, credits, description };
-  }));
+    studies.push({ id, name, link: `link`, credits, description });
+  };
   return studies;
 }
 
